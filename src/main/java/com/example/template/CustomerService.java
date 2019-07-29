@@ -28,7 +28,7 @@ public class CustomerService {
             System.out.println(" #### type = " + surveyCompleted.getType());
 
             /**
-             * 배송 완료 이벤트시 설문조사 시작함
+             * 설문조사 완료시 설문조사 결과를 분석하여 추가 물량을 요청함
              */
             if( surveyCompleted.getType().equals(SurveyCompleted.class.getSimpleName())){
 
