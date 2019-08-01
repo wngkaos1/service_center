@@ -7,11 +7,6 @@ public class SurveyCompleted {
     private String customerName;
     private String surveyMessage;
 
-
-    public SurveyCompleted(){
-        this.setType(this.getClass().getSimpleName());
-    }
-
     public String getType() {
         return type;
     }
