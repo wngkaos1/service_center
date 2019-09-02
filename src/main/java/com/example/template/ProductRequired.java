@@ -1,22 +1,13 @@
 package com.example.template;
 
-public class ProductRequired {
+public class ProductRequired  extends AbstractEvent{
 
-    private String type ;
     private String stateMessage = "추가 물량이 필요함";
 
     private String productName ;
 
     public ProductRequired(){
-        this.setType(this.getClass().getSimpleName());
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+        this.setEventType(this.getClass().getSimpleName());
     }
 
     public String getStateMessage() {

@@ -25,12 +25,12 @@ public class CustomerService {
         try {
             surveyCompleted = objectMapper.readValue(message, SurveyCompleted.class);
 
-            System.out.println(" #### type = " + surveyCompleted.getType());
+            System.out.println(" #### type = " + surveyCompleted.getEventType());
 
             /**
              * 설문조사 완료시 설문조사 결과를 분석하여 추가 물량을 요청함
              */
-            if( surveyCompleted.getType().equals(SurveyCompleted.class.getSimpleName())){
+            if( surveyCompleted.getEventType().equals(SurveyCompleted.class.getSimpleName())){
 
                 Customer customer = new Customer();
                 customer.setCustomerName(surveyCompleted.getCustomerName());
