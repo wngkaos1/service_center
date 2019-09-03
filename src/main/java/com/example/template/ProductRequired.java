@@ -1,5 +1,8 @@
 package com.example.template;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ProductRequired  extends AbstractEvent{
 
     private String stateMessage = "추가 물량이 필요함";
@@ -8,6 +11,8 @@ public class ProductRequired  extends AbstractEvent{
 
     public ProductRequired(){
         this.setEventType(this.getClass().getSimpleName());
+        SimpleDateFormat defaultSimpleDateFormat = new SimpleDateFormat("YYYYMMddHHmmss");
+        this.timestamp = defaultSimpleDateFormat.format(new Date());
     }
 
     public String getStateMessage() {
