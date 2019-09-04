@@ -7,48 +7,31 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PostPersist;
+import javax.persistence.*;
 
 @Entity
-public class Customer {
+public class Survey {
 
     @Id
     @GeneratedValue
     private Long id;
     private String customerName;
-    private String customerRequirements;
+    private String surveyMessage;
+    // 만족 불만족 여부 - 불만족이 있으면 블랙리스트에 추가된다.
+    private int productSatisfaction;
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerRequirements() {
-        return customerRequirements;
-    }
-
-    public void setCustomerRequirements(String customerRequirements) {
-        this.customerRequirements = customerRequirements;
-    }
 
     @PostPersist
-    private void publishStart() {
+    private void onComplete() {
         KafkaTemplate kafkaTemplate = Application.applicationContext.getBean(KafkaTemplate.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
 
-        ProductRequired productRequired = new ProductRequired();
-        productRequired.setProductName("리모콘");
+        SurveyCompleted surveyCompleted = new SurveyCompleted();
         try {
-            BeanUtils.copyProperties(this, productRequired);
-            json = objectMapper.writeValueAsString(productRequired);
+            BeanUtils.copyProperties(this, surveyCompleted);
+            json = objectMapper.writeValueAsString(surveyCompleted);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("JSON format exception", e);
         }
@@ -59,5 +42,29 @@ public class Customer {
             ProducerRecord producerRecord = new ProducerRecord<>(topicName, json);
             kafkaTemplate.send(producerRecord);
         }
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getSurveyMessage() {
+        return surveyMessage;
+    }
+
+    public void setSurveyMessage(String surveyMessage) {
+        this.surveyMessage = surveyMessage;
+    }
+
+    public int getProductSatisfaction() {
+        return productSatisfaction;
+    }
+
+    public void setProductSatisfaction(int productSatisfaction) {
+        this.productSatisfaction = productSatisfaction;
     }
 }

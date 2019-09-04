@@ -1,10 +1,21 @@
 package com.example.template;
 
-public class SurveyCompleted extends AbstractEvent {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    private String stateMessage ;
+public class SurveyCompleted  extends AbstractEvent{
+
+    private String stateMessage = "설문이 완료됨";
     private String customerName;
     private String surveyMessage;
+    private int productSatisfaction;
+
+
+    public SurveyCompleted(){
+        this.setEventType(this.getClass().getSimpleName());
+        SimpleDateFormat defaultSimpleDateFormat = new SimpleDateFormat("YYYYMMddHHmmss");
+        this.timestamp = defaultSimpleDateFormat.format(new Date());
+    }
 
     public String getStateMessage() {
         return stateMessage;
@@ -28,5 +39,13 @@ public class SurveyCompleted extends AbstractEvent {
 
     public void setSurveyMessage(String surveyMessage) {
         this.surveyMessage = surveyMessage;
+    }
+
+    public int getProductSatisfaction() {
+        return productSatisfaction;
+    }
+
+    public void setProductSatisfaction(int productSatisfaction) {
+        this.productSatisfaction = productSatisfaction;
     }
 }
