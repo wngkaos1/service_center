@@ -17,6 +17,9 @@ public class Survey {
     private Long id;
     private String customerName;
     private String surveyMessage;
+
+    private int surveyRecommend;
+    private int surveyDelivery;
     // 만족 불만족 여부 - 불만족이 있으면 블랙리스트에 추가된다.
     private int productSatisfaction;
 
@@ -58,6 +61,22 @@ public class Survey {
 
     public void setSurveyMessage(String surveyMessage) {
         this.surveyMessage = surveyMessage;
+    }
+
+    public int getSurveyRecommend() {
+        return surveyRecommend;
+    }
+
+    public void setSurveyRecommend(int surveyRecommend) {
+        this.surveyRecommend = surveyRecommend;
+    }
+
+    public int getSurveyDelivery() {
+        return surveyDelivery;
+    }
+
+    public void setSurveyDelivery(int surveyDelivery) {
+        this.surveyDelivery = surveyDelivery;
     }
 
     public int getProductSatisfaction() {
