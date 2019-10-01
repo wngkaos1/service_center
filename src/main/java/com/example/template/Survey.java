@@ -19,12 +19,18 @@ public class Survey {
     private String orderId;
     private String customerId;
     private String customerName;
-    private String surveyMessage;
+
+    //상품정보
+    private String productName;
+    private String productPrice;
+    private String productQty;
+
 
     private int surveyRecommend;
     private int surveyDelivery;
     // 만족 불만족 여부 - 불만족이 있으면 블랙리스트에 추가된다.
     private int productSatisfaction;
+    private String surveyMessage;
 
 
     @PostPersist
@@ -49,6 +55,18 @@ public class Survey {
             kafkaTemplate.send(producerRecord);
         }
     }
+
+    public String getProductName() { return productName; }
+
+    public void setProductName(String productName) { this.productName = productName; }
+
+    public String getProductPrice() { return productPrice; }
+
+    public void setProductPrice(String productPrice) { this.productPrice = productPrice; }
+
+    public String getProductQty() { return productQty; }
+
+    public void setProductQty(String productQty) { this.productQty = productQty; }
 
     public String getOrderId() { return orderId; }
 
