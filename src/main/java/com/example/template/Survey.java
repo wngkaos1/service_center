@@ -15,6 +15,8 @@ public class Survey {
     @Id
     @GeneratedValue
     private Long id;
+
+    private String orderId;
     private String customerId;
     private String customerName;
     private String surveyMessage;
@@ -47,6 +49,10 @@ public class Survey {
             kafkaTemplate.send(producerRecord);
         }
     }
+
+    public String getOrderId() { return orderId; }
+
+    public void setOrderId(String orderId) { this.orderId = orderId; }
 
     public String getCustomerId() {
         return customerId;
